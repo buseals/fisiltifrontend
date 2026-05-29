@@ -46,6 +46,27 @@ export default function SettingsPage() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showNewPasswordAgain, setShowNewPasswordAgain] = useState(false);
 
+  // ⭐ Şifre Güç Kontrolü
+  const checkPasswordStrength = (password) => {
+    let score = 0;
+
+    if (password.length >= 8) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    if (score <= 2) return "zayıf";
+    if (score === 3) return "orta";
+    return "güçlü";
+  };
+
+  const getStrengthColor = (strength) => {
+    if (strength === "zayıf") return "red";
+    if (strength === "orta") return "orange";
+    return "limegreen";
+  };
+
   // ⭐ Bilgileri Kaydet
   const handleSave = () => {
     const updatedUser = {
@@ -88,6 +109,13 @@ export default function SettingsPage() {
 
     if (passwordForm.newPassword !== passwordForm.newPasswordAgain) {
       alert("Yeni şifreler eşleşmiyor.");
+      return;
+    }
+
+    const strength = checkPasswordStrength(passwordForm.newPassword);
+
+    if (strength === "zayıf") {
+      alert("Şifre çok zayıf. Lütfen daha güçlü bir şifre belirleyin.");
       return;
     }
 
@@ -241,6 +269,20 @@ export default function SettingsPage() {
                 {showNewPassword ? "👁️" : "👁️‍🗨️"}
               </span>
             </div>
+
+            {/* ⭐ Şifre Güç Göstergesi */}
+            <p
+              className="password-strength"
+              style={{
+                color: getStrengthColor(
+                  checkPasswordStrength(passwordForm.newPassword)
+                ),
+                marginTop: "5px",
+                fontSize: "14px"
+              }}
+            >
+              Güç: {checkPasswordStrength(passwordForm.newPassword)}
+            </p>
 
             <label>Yeni şifre tekrar:</label>
             <div className="password-wrapper">

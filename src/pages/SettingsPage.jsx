@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../styles/settings.css";
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("account");
 
-  // ⭐ Giriş yapan kullanıcıyı al — güvenli default ile
-  const rawUser = JSON.parse(localStorage.getItem("user") || "null");
-
-  const storedUser = rawUser || {
+  // ⭐ Kullanıcıyı güvenli şekilde al
+  const storedUser = JSON.parse(localStorage.getItem("user") || "null") || {
     name: "",
     username: "@kullanici",
     email: "",
@@ -15,32 +13,13 @@ export default function SettingsPage() {
   };
 
   const [userInfo, setUserInfo] = useState({
-    joinDate: storedUser.joinDate || "12/03/2026",
+    name: storedUser.name || "",
     username: storedUser.username || "@kullanici",
     email: storedUser.email || "",
-    name: storedUser.name || ""
+    joinDate: storedUser.joinDate || "12/03/2026"
   });
 
   const [editForm, setEditForm] = useState({ ...userInfo });
-
- useEffect(() => {
-  const raw = JSON.parse(localStorage.getItem("user") || "null");
-  const u = raw || storedUser;
-
-  setUserInfo({
-    joinDate: u.joinDate || "12/03/2026",
-    username: u.username || "@kullanici",
-    email: u.email || "",
-    name: u.name || ""
-  });
-
-  setEditForm({
-    joinDate: u.joinDate || "12/03/2026",
-    username: u.username || "@kullanici",
-    email: u.email || "",
-    name: u.name || ""
-  });
-});
 
   // ⭐ Bildirim ayarı
   const [notificationsEnabled, setNotificationsEnabled] = useState(

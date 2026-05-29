@@ -4,8 +4,15 @@ import "../styles/settings.css";
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("account");
 
-  // ⭐ Giriş yapan kullanıcıyı al
-  const storedUser = JSON.parse(localStorage.getItem("user")) || {};
+  // ⭐ Giriş yapan kullanıcıyı al — güvenli default ile
+  const rawUser = JSON.parse(localStorage.getItem("user") || "null");
+
+  const storedUser = rawUser || {
+    name: "",
+    username: "@kullanici",
+    email: "",
+    joinDate: "12/03/2026"
+  };
 
   const [userInfo, setUserInfo] = useState({
     joinDate: storedUser.joinDate || "12/03/2026",
@@ -17,11 +24,21 @@ export default function SettingsPage() {
   const [editForm, setEditForm] = useState({ ...userInfo });
 
   useEffect(() => {
+    const raw = JSON.parse(localStorage.getItem("user") || "null");
+    const u = raw || storedUser;
+
     setUserInfo({
-      joinDate: storedUser.joinDate || "12/03/2026",
-      username: storedUser.username,
-      email: storedUser.email,
-      name: storedUser.name
+      joinDate: u.joinDate || "12/03/2026",
+      username: u.username || "@kullanici",
+      email: u.email || "",
+      name: u.name || ""
+    });
+
+    setEditForm({
+      joinDate: u.joinDate || "12/03/2026",
+      username: u.username || "@kullanici",
+      email: u.email || "",
+      name: u.name || ""
     });
   }, []);
 
@@ -57,18 +74,15 @@ export default function SettingsPage() {
       name: editForm.name,
       username:
         "@" +
-        editForm.username
+        (editForm.username || "")
           .toLowerCase()
           .replace(/\s+/g, "_")
           .replace(/[^a-z0-9_]/g, ""),
       email: editForm.email,
-      joinDate: editForm.joinDate
+      joinDate: editForm.joinDate || "12/03/2026"
     };
 
-    // ⭐ localStorage güncelle
     localStorage.setItem("user", JSON.stringify(updatedUser));
-
-    // ⭐ state güncelle
     setUserInfo(updatedUser);
 
     alert("Bilgiler güncellendi!");

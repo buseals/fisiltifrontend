@@ -70,14 +70,18 @@ namespace FisilitaBackend.Controllers
                 {
                     return Unauthorized(new { Mesaj = "E-posta veya şifre hatalı." });
                 }
+                else {
+                    // Her şey doğruysa giriş başarılı mesajı, kullanıcı bilgileri ve Rolü dönüyoruz
+                    return Ok(new
+                    {
+                        Mesaj = "Giriş başarılı!",
+                        KullaniciAdi = user.Username,
+                        Eposta = user.Email,
+                        Rol = user.Role // Buse'nin Admin paneline yönlendirme yapabilmesi için kritik alan!
+                    });
+                }
 
-                // Her şey doğruysa giriş başarılı mesajı ve kullanıcı bilgilerini dönüyoruz
-                return Ok(new
-                {
-                    Mesaj = "Giriş başarılı!",
-                    KullaniciAdi = user.Username,
-                    Eposta = user.Email
-                });
+                
             }
             catch (Exception ex)
             {

@@ -24,6 +24,8 @@ namespace FisilitaBackend.Models
         public int FollowingCount { get; set; } = 0; // Takip Edilen Sayısı
 
         public bool AllowNotifications { get; set; } = true; // Varsayılan olarak bildirimler açık olsun
+
+        public string Role { get; set; } = "User"; // Kullanıcı rolü (Varsayılan: User, Panel için: Admin)
         public DateTime JoinedDate { get; set; } = DateTime.UtcNow; // Katılma Tarihi
     }
 }

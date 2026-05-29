@@ -3,9 +3,33 @@ import "../styles/auth.css";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [strength, setStrength] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
+  // ⭐ Şifre gücü hesaplama fonksiyonu
+  const checkPasswordStrength = (password) => {
+    let score = 0;
+
+    if (password.length >= 6) score++;
+    if (password.length >= 10) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    if (score <= 1) return "Zayıf";
+    if (score <= 3) return "Orta";
+    return "Güçlü";
+  };
+
+  // ⭐ Şifre yazıldıkça gücü hesapla
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    setStrength(checkPasswordStrength(value));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +43,7 @@ export default function ForgotPasswordPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, newPassword: password }),
       });
 
       const data = await response.json();
@@ -43,10 +67,12 @@ export default function ForgotPasswordPage() {
         <h2 className="forgot-title">Şifre Sıfırlama</h2>
 
         <p className="forgot-desc">
-          E‑posta adresini gir, sana şifre sıfırlama bağlantısı gönderelim.
+          E‑posta adresini ve yeni şifreni gir. Sana sıfırlama bağlantısı gönderelim.
         </p>
 
         <form className="form" onSubmit={handleSubmit}>
+          
+          {/* ⭐ E‑posta */}
           <div className="input-wrapper">
             <span className="input-icon">📧</span>
             <input
@@ -59,6 +85,27 @@ export default function ForgotPasswordPage() {
               disabled={loading}
             />
           </div>
+
+          {/* ⭐ Yeni Şifre */}
+          <div className="input-wrapper">
+            <span className="input-icon">🔒</span>
+            <input
+              className="input"
+              type="password"
+              placeholder="Yeni Şifre"
+              value={password}
+              onChange={handlePasswordChange}
+              required
+              disabled={loading}
+            />
+          </div>
+
+          {/* ⭐ Şifre Gücü */}
+          {password && (
+            <p className={`strength ${strength.toLowerCase()}`}>
+              Şifre Gücü: {strength}
+            </p>
+          )}
 
           <button className="btn" disabled={loading}>
             {loading ? "Gönderiliyor..." : "Mail Gönder"}

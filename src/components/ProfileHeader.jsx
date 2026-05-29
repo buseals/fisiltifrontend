@@ -10,7 +10,6 @@ export default function ProfileHeader({
   username
 }) {
 
-  // ⭐ Arka plan rengine göre otomatik yazı rengi seçen fonksiyon
   const getTextColor = (bgColor) => {
     if (!bgColor || !bgColor.startsWith("#")) return "#fff";
     const c = bgColor.substring(1);
@@ -25,7 +24,7 @@ export default function ProfileHeader({
   return (
     <div className="profile-header">
 
-      {/* SOL BLOK */}
+      {/* SOL BLOK — İSİM */}
       <div className="profile-left-column">
 
         <div className="profile-photo-section" onClick={onPhotoClick}>
@@ -36,6 +35,7 @@ export default function ProfileHeader({
           )}
         </div>
 
+        {/* ⭐ İSİM BURADA GÖRÜNECEK */}
         <div className="profile-name-under-photo">{name}</div>
 
         <button className="edit-profile-btn" onClick={onEditProfileClick}>
@@ -48,9 +48,10 @@ export default function ProfileHeader({
 
       </div>
 
-      {/* SAĞ BLOK */}
+      {/* SAĞ BLOK — KULLANICI ADI */}
       <div className="profile-right-column">
 
+        {/* ⭐ KULLANICI ADI BURADA GÖRÜNECEK */}
         <h2 className="profile-username">{username}</h2>
 
         <div className="stats-row">
@@ -70,7 +71,6 @@ export default function ProfileHeader({
           </div>
         </div>
 
-        {/* ⭐ BİYOGRAFİ KUTUSU — OTOMATİK YAZI RENGİ ⭐ */}
         <div
           className="bio-box"
           style={{

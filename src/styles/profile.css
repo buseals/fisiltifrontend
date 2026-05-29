@@ -624,3 +624,18 @@
   text-align: left;
   padding: 12px 0;   /* ⭐ linklerle aynı boşluk */
 }
+.profile-left-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.profile-username {
+  font-size: 18px;
+  font-weight: 600;
+  color: #9ca3af;
+  margin-bottom: 10px;
+  text-align: left;
+}

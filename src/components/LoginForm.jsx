@@ -23,15 +23,29 @@ export default function LoginForm({ onSwitch }) {
       (u) => u.email === email && u.password === password
     );
 
-    // Kullanıcı bulunamadıysa
     if (!savedUser) {
       setError("E‑posta veya şifre hatalı.");
       setLoading(false);
       return;
     }
 
-    // ⭐ Giriş yapan kullanıcıyı kaydet
-    localStorage.setItem("user", JSON.stringify(savedUser));
+    // ⭐ Username'i otomatik oluştur (buse → @buse)
+    const username =
+      savedUser.name
+        .toLowerCase()
+        .replace(/\s+/g, "_")
+        .replace(/[^a-z0-9_]/g, "") || "kullanici";
+
+    // ⭐ Giriş yapan kullanıcıyı doğru formatta kaydet
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        name: savedUser.name,
+        email: savedUser.email,
+        username: "@" + username,
+        role: savedUser.role,
+      })
+    );
 
     // ⭐ Rol kontrolü
     if (savedUser.role === "admin") {

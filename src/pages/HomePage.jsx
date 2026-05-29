@@ -15,11 +15,14 @@ export default function HomePage() {
     window.location.href = "/";
   };
 
+  // ⭐ Giriş yapan kullanıcıyı al
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
   // ⭐ POSTS YÜKLENİRKEN ESKİ ZAMANLARI DÜZELT
   useEffect(() => {
     const saved = localStorage.getItem("posts");
 
-    const defaultPosts = []; // artık boş
+    const defaultPosts = [];
 
     if (saved) {
       let loaded = JSON.parse(saved);
@@ -126,35 +129,31 @@ export default function HomePage() {
     return brightness > 140 ? "#000" : "#fff";
   };
 
-// ⭐ Giriş yapan kullanıcıyı al
-const currentUser = JSON.parse(localStorage.getItem("user"));
+  // ⭐ YENİ POST PAYLAŞMA — DÜZELTİLMİŞ
+  const handleShare = () => {
+    if (postText.trim() === "") return;
 
-// ⭐ YENİ POST PAYLAŞMA
-const handleShare = () => {
-  if (postText.trim() === "") return;
+    const newPost = {
+      id: Date.now(),
+      username: currentUser?.username || "@misafir",
+      content: postText,
+      time: Date.now(),
+      color: postColor,
+      emoji: "💬",
+    };
 
-  const newPost = {
-    id: Date.now(),
-    username: currentUser?.username || "@misafir",
-    content: postText,
-    time: Date.now(),
-    color: postColor,
-    emoji: "💬",
+    const updated = [newPost, ...posts];
+    setPosts(updated);
+
+    setPostText("");
+    setPostColor("#1f2937");
+    setShowPostForm(false);
   };
 
-  const updated = [newPost, ...posts];
-  setPosts(updated);
-
-  setPostText("");
-  setPostColor("#1f2937");
-  setShowPostForm(false);
-};
-
-  // ⭐ RETURN BLOĞU — TAM, HATASIZ
   return (
     <div className="home-container">
 
-      {/* ÜST BAR */}
+      {/* ⭐ ÜST BAR */}
       <div className="topbar">
         <div className="topbar-content">
 

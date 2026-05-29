@@ -194,3 +194,20 @@ width: 58px;
   margin-bottom: 18px;
   line-height: 1.5;
 }
+.strength {
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.strength.zayıf {
+  color: #ff4d4d;
+}
+
+.strength.orta {
+  color: #ffb84d;
+}
+
+.strength.güçlü {
+  color: #4dff88;
+}

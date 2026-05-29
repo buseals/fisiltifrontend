@@ -23,24 +23,24 @@ export default function SettingsPage() {
 
   const [editForm, setEditForm] = useState({ ...userInfo });
 
-  useEffect(() => {
-    const raw = JSON.parse(localStorage.getItem("user") || "null");
-    const u = raw || storedUser;
+ useEffect(() => {
+  const raw = JSON.parse(localStorage.getItem("user") || "null");
+  const u = raw || storedUser;
 
-    setUserInfo({
-      joinDate: u.joinDate || "12/03/2026",
-      username: u.username || "@kullanici",
-      email: u.email || "",
-      name: u.name || ""
-    });
+  setUserInfo({
+    joinDate: u.joinDate || "12/03/2026",
+    username: u.username || "@kullanici",
+    email: u.email || "",
+    name: u.name || ""
+  });
 
-    setEditForm({
-      joinDate: u.joinDate || "12/03/2026",
-      username: u.username || "@kullanici",
-      email: u.email || "",
-      name: u.name || ""
-    });
-  }, []);
+  setEditForm({
+    joinDate: u.joinDate || "12/03/2026",
+    username: u.username || "@kullanici",
+    email: u.email || "",
+    name: u.name || ""
+  });
+});
 
   // ⭐ Bildirim ayarı
   const [notificationsEnabled, setNotificationsEnabled] = useState(

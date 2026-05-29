@@ -183,7 +183,13 @@ export default function HomePage() {
       {/* GÖNDERİLER */}
       <div className="main-layout">
 
-        <Sidebar onLogout={handleLogout} />
+        <Sidebar
+          activeMenu={activeMenu}
+          setActiveMenu={setActiveMenu}
+          showSubmenu={showSubmenu}
+          setShowSubmenu={setShowSubmenu}
+          onLogout={handleLogout}
+        />
 
         <div className="feed">
           {posts.map((post) => (
@@ -336,3 +342,4 @@ export default function HomePage() {
     </div>
   );
 }
+

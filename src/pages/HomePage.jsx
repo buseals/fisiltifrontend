@@ -4,11 +4,9 @@ import Sidebar from "../components/Sidebar";
 
 export default function HomePage() {
   const [activeMenu, setActiveMenu] = useState(null);
-
   const [showPostForm, setShowPostForm] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSubmenu, setShowSubmenu] = useState(false);
-
   const [posts, setPosts] = useState([]);
 
   const handleLogout = () => {
@@ -24,36 +22,35 @@ export default function HomePage() {
     { id: 4, user: "@ayşe", text: "Kitap okumak gibisi yok 📚", time: Date.now() - 1800000, color: "rgba(255,255,255,0.04)" }
   ];
 
-// ⭐ POSTS YÜKLENİRKEN ESKİ ZAMANLARI DÜZELT
-useEffect(() => {
-  const saved = localStorage.getItem("posts");
+  // ⭐ POSTS YÜKLENİRKEN ESKİ ZAMANLARI DÜZELT
+  useEffect(() => {
+    const saved = localStorage.getItem("posts");
 
-  if (saved) {
-    let loaded = JSON.parse(saved);
+    if (saved) {
+      let loaded = JSON.parse(saved);
 
-    loaded = loaded.map(p => {
-      if (typeof p.time === "string") {
-        const t = p.time;
+      loaded = loaded.map(p => {
+        if (typeof p.time === "string") {
+          const t = p.time;
 
-        if (t.includes("şimdi")) return { ...p, time: Date.now() };
-        if (t.includes("dakika")) return { ...p, time: Date.now() - parseInt(t) * 60000 };
-        if (t.includes("saat")) return { ...p, time: Date.now() - parseInt(t) * 3600000 };
-        if (t.includes("gün")) return { ...p, time: Date.now() - parseInt(t) * 86400000 };
+          if (t.includes("şimdi")) return { ...p, time: Date.now() };
+          if (t.includes("dakika")) return { ...p, time: Date.now() - parseInt(t) * 60000 };
+          if (t.includes("saat")) return { ...p, time: Date.now() - parseInt(t) * 3600000 };
+          if (t.includes("gün")) return { ...p, time: Date.now() - parseInt(t) * 86400000 };
 
-        return { ...p, time: Date.now() };
-      }
-      return p;
-    });
+          return { ...p, time: Date.now() };
+        }
+        return p;
+      });
 
-    setPosts(loaded);
-    localStorage.setItem("posts", JSON.stringify(loaded));
+      setPosts(loaded);
+      localStorage.setItem("posts", JSON.stringify(loaded));
 
-  } else {
-    setPosts(defaultPosts);
-    localStorage.setItem("posts", JSON.stringify(defaultPosts));
-  }
-}, []);
-
+    } else {
+      setPosts(defaultPosts);
+      localStorage.setItem("posts", JSON.stringify(defaultPosts));
+    }
+  }, []);
 
   // ⭐ ADMIN PANELİNE KAYIT EKLEME
   const addAdminLog = (type, post) => {
@@ -151,6 +148,7 @@ useEffect(() => {
     setShowPostForm(false);
   };
 
+  // ⭐ RETURN BLOĞU
   return (
     <div className="home-container">
 
@@ -161,7 +159,6 @@ useEffect(() => {
           <div className="logo-area">
             <div className="logo-icon-wrapper">
               <img src="/assets/fisilti-icon.png" className="logo-icon" alt="" />
-
             </div>
 
             <div className="logo-text">

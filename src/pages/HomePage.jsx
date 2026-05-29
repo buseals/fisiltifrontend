@@ -15,13 +15,6 @@ export default function HomePage() {
     window.location.href = "/";
   };
 
-  const defaultPosts = [
-    { id: 1, user: "@buse", text: "Bugün çok güzel bir gün 🌸", time: Date.now() - 7200000, color: "rgba(255,255,255,0.04)" },
-    { id: 2, user: "@helin", text: "Kahve molası ☕", time: Date.now() - 3600000, color: "rgba(255,255,255,0.04)" },
-    { id: 3, user: "@mert", text: "Yeni şarkımı paylaştım 🎶", time: Date.now() - 600000, color: "rgba(255,255,255,0.04)" },
-    { id: 4, user: "@ayşe", text: "Kitap okumak gibisi yok 📚", time: Date.now() - 1800000, color: "rgba(255,255,255,0.04)" }
-  ];
-
  // ⭐ POSTS YÜKLENİRKEN ESKİ ZAMANLARI DÜZELT
 useEffect(() => {
   const saved = localStorage.getItem("posts");

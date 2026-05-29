@@ -126,26 +126,29 @@ export default function HomePage() {
     return brightness > 140 ? "#000" : "#fff";
   };
 
-  // ⭐ YENİ POST PAYLAŞMA
-  const handleShare = () => {
-    if (postText.trim() === "") return;
+// ⭐ Giriş yapan kullanıcıyı al
+const currentUser = JSON.parse(localStorage.getItem("user"));
 
-    const newPost = {
-      id: Date.now(),
-      username: "@buse",
-      content: postText,
-      time: Date.now(),
-      color: postColor,
-      emoji: "💬",
-    };
+// ⭐ YENİ POST PAYLAŞMA
+const handleShare = () => {
+  if (postText.trim() === "") return;
 
-    const updated = [newPost, ...posts];
-    setPosts(updated);
-
-    setPostText("");
-    setPostColor("#1f2937");
-    setShowPostForm(false);
+  const newPost = {
+    id: Date.now(),
+    username: currentUser?.username || "@misafir",
+    content: postText,
+    time: Date.now(),
+    color: postColor,
+    emoji: "💬",
   };
+
+  const updated = [newPost, ...posts];
+  setPosts(updated);
+
+  setPostText("");
+  setPostColor("#1f2937");
+  setShowPostForm(false);
+};
 
   // ⭐ RETURN BLOĞU — TAM, HATASIZ
   return (

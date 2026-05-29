@@ -125,17 +125,19 @@ export default function RegisterForm({ onSwitch }) {
         </span>
       </div>
 
-      {/* ⭐ Şifre Güç Göstergesi */}
-      <p
-        className="password-strength"
-        style={{
-          color: getStrengthColor(checkPasswordStrength(password)),
-          marginTop: "5px",
-          fontSize: "14px",
-        }}
-      >
-        Güç: {checkPasswordStrength(password)}
-      </p>
+      {/* ⭐ Şifre boş değilse güç göstergesi görünsün */}
+      {password.length > 0 && (
+        <p
+          className="password-strength"
+          style={{
+            color: getStrengthColor(checkPasswordStrength(password)),
+            marginTop: "5px",
+            fontSize: "14px",
+          }}
+        >
+          Güç: {checkPasswordStrength(password)}
+        </p>
+      )}
 
       <button className="btn" disabled={loading}>
         {loading ? "Kaydediliyor..." : "Kayıt Ol"}

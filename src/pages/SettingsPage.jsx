@@ -270,19 +270,21 @@ export default function SettingsPage() {
               </span>
             </div>
 
-            {/* ⭐ Şifre Güç Göstergesi */}
-            <p
-              className="password-strength"
-              style={{
-                color: getStrengthColor(
-                  checkPasswordStrength(passwordForm.newPassword)
-                ),
-                marginTop: "5px",
-                fontSize: "14px"
-              }}
-            >
-              Güç: {checkPasswordStrength(passwordForm.newPassword)}
-            </p>
+            {/* ⭐ Şifre boş değilse güç göstergesi görünsün */}
+            {passwordForm.newPassword.length > 0 && (
+              <p
+                className="password-strength"
+                style={{
+                  color: getStrengthColor(
+                    checkPasswordStrength(passwordForm.newPassword)
+                  ),
+                  marginTop: "5px",
+                  fontSize: "14px"
+                }}
+              >
+                Güç: {checkPasswordStrength(passwordForm.newPassword)}
+              </p>
+            )}
 
             <label>Yeni şifre tekrar:</label>
             <div className="password-wrapper">

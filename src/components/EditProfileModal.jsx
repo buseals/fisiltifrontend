@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export default function EditProfileModal({ isOpen, onClose, onSave, initialData }) {
   const [fullname, setFullname] = useState(initialData.fullname);
   const [username, setUsername] = useState(initialData.username);
+  const [email, setEmail] = useState(initialData.email);
   const [bio, setBio] = useState(initialData.bio);
   const [bgColor, setBgColor] = useState(initialData.bgColor);
 
@@ -13,6 +14,31 @@ export default function EditProfileModal({ isOpen, onClose, onSave, initialData 
   ];
 
   if (!isOpen) return null;
+
+  const handleSave = () => {
+    // ⭐ Kullanıcı adını otomatik formatla
+    const formattedUsername =
+      "@" +
+      username
+        .toLowerCase()
+        .replace(/\s+/g, "_")
+        .replace(/[^a-z0-9_]/g, "");
+
+    // ⭐ localStorage'daki user bilgisini güncelle
+    const updatedUser = {
+      name: fullname,
+      username: formattedUsername,
+      email: email,
+      bio: bio,
+      bgColor: bgColor,
+      role: initialData.role || "user"
+    };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    // ⭐ Üst sayfaya da gönder
+    onSave(updatedUser);
+  };
 
   return (
     <div className="modal-overlay">
@@ -34,6 +60,13 @@ export default function EditProfileModal({ isOpen, onClose, onSave, initialData 
             className="editprofile-input"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+          />
+
+          <label className="editprofile-label">E‑posta</label>
+          <input
+            className="editprofile-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <label className="editprofile-label">Biyografi</label>
@@ -66,18 +99,7 @@ export default function EditProfileModal({ isOpen, onClose, onSave, initialData 
         <div className="editprofile-buttons">
           <button className="editprofile-cancel" onClick={onClose}>İptal</button>
 
-          {/* ⭐ TÜM VERİLERİ GERİ GÖNDEREN KAYDET ⭐ */}
-          <button
-            className="editprofile-save"
-            onClick={() =>
-              onSave({
-                fullname,
-                username,
-                bio,
-                bgColor
-              })
-            }
-          >
+          <button className="editprofile-save" onClick={handleSave}>
             Kaydet
           </button>
         </div>

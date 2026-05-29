@@ -4,13 +4,28 @@ import "../styles/settings.css";
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("account");
 
+  // ⭐ Giriş yapan kullanıcıyı al
+  const storedUser = JSON.parse(localStorage.getItem("user")) || {};
+
+  const [userInfo, setUserInfo] = useState({
+    joinDate: storedUser.joinDate || "12/03/2026",
+    username: storedUser.username || "@kullanici",
+    email: storedUser.email || "",
+    name: storedUser.name || ""
+  });
+
+  const [editForm, setEditForm] = useState({ ...userInfo });
+
   useEffect(() => {
-    if (!localStorage.getItem("password")) {
-      localStorage.setItem("password", "123456");
-    }
+    setUserInfo({
+      joinDate: storedUser.joinDate || "12/03/2026",
+      username: storedUser.username,
+      email: storedUser.email,
+      name: storedUser.name
+    });
   }, []);
 
-  // ⭐ Bildirim ayarı artık notifSetting anahtarında tutuluyor
+  // ⭐ Bildirim ayarı
   const [notificationsEnabled, setNotificationsEnabled] = useState(
     localStorage.getItem("notifSetting") === "on"
   );
@@ -24,14 +39,7 @@ export default function SettingsPage() {
     window.location.href = "/";
   };
 
-  const [userInfo, setUserInfo] = useState({
-    joinDate: "12/03/2026",
-    username: "Buse_1",
-    email: "buse@gmail.com"
-  });
-
-  const [editForm, setEditForm] = useState({ ...userInfo });
-
+  // ⭐ Şifre alanları
   const [passwordForm, setPasswordForm] = useState({
     oldPassword: "",
     newPassword: "",
@@ -42,11 +50,32 @@ export default function SettingsPage() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showNewPasswordAgain, setShowNewPasswordAgain] = useState(false);
 
+  // ⭐ Bilgileri Kaydet
   const handleSave = () => {
-    setUserInfo(editForm);
+    const updatedUser = {
+      ...storedUser,
+      name: editForm.name,
+      username:
+        "@" +
+        editForm.username
+          .toLowerCase()
+          .replace(/\s+/g, "_")
+          .replace(/[^a-z0-9_]/g, ""),
+      email: editForm.email,
+      joinDate: editForm.joinDate
+    };
+
+    // ⭐ localStorage güncelle
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    // ⭐ state güncelle
+    setUserInfo(updatedUser);
+
+    alert("Bilgiler güncellendi!");
     setActiveTab("account");
   };
 
+  // ⭐ Şifre Kaydet
   const handlePasswordSave = () => {
     const currentPassword = localStorage.getItem("password");
 
@@ -150,8 +179,8 @@ export default function SettingsPage() {
             <h3 className="glass-title">Hesap Bilgileri</h3>
 
             <div className="info-block">
-              <span className="info-label">Katılma tarihi</span>
-              <span className="info-value">{userInfo.joinDate}</span>
+              <span className="info-label">Ad</span>
+              <span className="info-value">{userInfo.name}</span>
             </div>
 
             <div className="info-block">
@@ -162,6 +191,11 @@ export default function SettingsPage() {
             <div className="info-block">
               <span className="info-label">E‑posta</span>
               <span className="info-value">{userInfo.email}</span>
+            </div>
+
+            <div className="info-block">
+              <span className="info-label">Katılma tarihi</span>
+              <span className="info-value">{userInfo.joinDate}</span>
             </div>
 
             <button
@@ -256,12 +290,12 @@ export default function SettingsPage() {
           <div className="panel glass-card">
             <h3 className="glass-title">Bilgileri Düzenle</h3>
 
-            <label>Katılma tarihi:</label>
+            <label>Ad:</label>
             <input
               type="text"
-              value={editForm.joinDate}
+              value={editForm.name}
               onChange={(e) =>
-                setEditForm({ ...editForm, joinDate: e.target.value })
+                setEditForm({ ...editForm, name: e.target.value })
               }
             />
 
@@ -280,6 +314,15 @@ export default function SettingsPage() {
               value={editForm.email}
               onChange={(e) =>
                 setEditForm({ ...editForm, email: e.target.value })
+              }
+            />
+
+            <label>Katılma tarihi:</label>
+            <input
+              type="text"
+              value={editForm.joinDate}
+              onChange={(e) =>
+                setEditForm({ ...editForm, joinDate: e.target.value })
               }
             />
 

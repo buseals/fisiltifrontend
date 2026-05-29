@@ -22,35 +22,57 @@ export default function HomePage() {
     { id: 4, user: "@ayşe", text: "Kitap okumak gibisi yok 📚", time: Date.now() - 1800000, color: "rgba(255,255,255,0.04)" }
   ];
 
-  // ⭐ POSTS YÜKLENİRKEN ESKİ ZAMANLARI DÜZELT
-  useEffect(() => {
-    const saved = localStorage.getItem("posts");
+ // ⭐ POSTS YÜKLENİRKEN ESKİ ZAMANLARI DÜZELT
+useEffect(() => {
+  const saved = localStorage.getItem("posts");
 
-    if (saved) {
-      let loaded = JSON.parse(saved);
-
-      loaded = loaded.map(p => {
-        if (typeof p.time === "string") {
-          const t = p.time;
-
-          if (t.includes("şimdi")) return { ...p, time: Date.now() };
-          if (t.includes("dakika")) return { ...p, time: Date.now() - parseInt(t) * 60000 };
-          if (t.includes("saat")) return { ...p, time: Date.now() - parseInt(t) * 3600000 };
-          if (t.includes("gün")) return { ...p, time: Date.now() - parseInt(t) * 86400000 };
-
-          return { ...p, time: Date.now() };
-        }
-        return p;
-      });
-
-      setPosts(loaded);
-      localStorage.setItem("posts", JSON.stringify(loaded));
-
-    } else {
-      setPosts(defaultPosts);
-      localStorage.setItem("posts", JSON.stringify(defaultPosts));
+  // ⭐ defaultPosts artık burada tanımlı
+  const defaultPosts = [
+    {
+      id: 1,
+      username: "@buse",
+      content: "Merhaba dünya!",
+      time: Date.now(),
+      color: "#ffb3c6",
+      emoji: "🌸"
+    },
+    {
+      id: 2,
+      username: "@helin",
+      content: "Bugün hava çok güzel!",
+      time: Date.now() - 3600000,
+      color: "#b3e5ff",
+      emoji: "☀️"
     }
- }, [defaultPosts]);
+    // ... senin diğer default postların
+  ];
+
+  if (saved) {
+    let loaded = JSON.parse(saved);
+
+    loaded = loaded.map(p => {
+      if (typeof p.time === "string") {
+        const t = p.time;
+
+        if (t.includes("şimdi")) return { ...p, time: Date.now() };
+        if (t.includes("dakika")) return { ...p, time: Date.now() - parseInt(t) * 60000 };
+        if (t.includes("saat")) return { ...p, time: Date.now() - parseInt(t) * 3600000 };
+        if (t.includes("gün")) return { ...p, time: Date.now() - parseInt(t) * 86400000 };
+
+        return { ...p, time: Date.now() };
+      }
+      return p;
+    });
+
+    setPosts(loaded);
+    localStorage.setItem("posts", JSON.stringify(loaded));
+
+  } else {
+    setPosts(defaultPosts);
+    localStorage.setItem("posts", JSON.stringify(defaultPosts));
+  }
+}, []); // ⭐ dependency array tekrar boş
+
 
 
   // ⭐ ADMIN PANELİNE KAYIT EKLEME

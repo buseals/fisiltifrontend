@@ -18,13 +18,18 @@ export default function LoginForm({ onSwitch }) {
     // ⭐ Tüm kullanıcıları al
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // ⭐ Email + Şifre eşleşen kullanıcıyı bul
-    const savedUser = users.find(
-      (u) => u.email === email && u.password === password
-    );
+    // ⭐ Email eşleşen kullanıcıyı bul
+    const savedUser = users.find((u) => u.email === email);
 
     if (!savedUser) {
-      setError("E‑posta veya şifre hatalı.");
+      setError("Bu e‑posta ile kayıtlı kullanıcı bulunamadı.");
+      setLoading(false);
+      return;
+    }
+
+    // ⭐ Şifre kontrolü
+    if (savedUser.password !== password) {
+      setError("Şifre yanlış.");
       setLoading(false);
       return;
     }
@@ -44,6 +49,7 @@ export default function LoginForm({ onSwitch }) {
         email: savedUser.email,
         username: "@" + username,
         role: savedUser.role,
+        joinDate: savedUser.joinDate
       })
     );
 

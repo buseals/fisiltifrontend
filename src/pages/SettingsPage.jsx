@@ -4,7 +4,7 @@ import "../styles/settings.css";
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("account");
 
-  // ⭐ Kullanıcıyı güvenli şekilde al
+  // ⭐ Aktif kullanıcıyı al
   const storedUser = JSON.parse(localStorage.getItem("user") || "null") || {
     name: "",
     username: "@kullanici",
@@ -89,9 +89,15 @@ export default function SettingsPage() {
     setActiveTab("account");
   };
 
-  // ⭐ Şifre Kaydet
+  // ⭐ Şifre Kaydet (users[] ile tam senkron)
   const handlePasswordSave = () => {
-    const currentPassword = localStorage.getItem("password");
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const currentUser = users.find((u) => u.email === userInfo.email);
+
+    if (!currentUser) {
+      alert("Kullanıcı bulunamadı.");
+      return;
+    }
 
     if (
       !passwordForm.oldPassword ||
@@ -102,7 +108,7 @@ export default function SettingsPage() {
       return;
     }
 
-    if (passwordForm.oldPassword !== currentPassword) {
+    if (passwordForm.oldPassword !== currentUser.password) {
       alert("Eski şifre yanlış.");
       return;
     }
@@ -113,13 +119,14 @@ export default function SettingsPage() {
     }
 
     const strength = checkPasswordStrength(passwordForm.newPassword);
-
     if (strength === "zayıf") {
       alert("Şifre çok zayıf. Lütfen daha güçlü bir şifre belirleyin.");
       return;
     }
 
-    localStorage.setItem("password", passwordForm.newPassword);
+    // ⭐ Yeni şifreyi kaydet
+    currentUser.password = passwordForm.newPassword;
+    localStorage.setItem("users", JSON.stringify(users));
 
     alert("Şifre başarıyla değiştirildi!");
 
@@ -270,19 +277,21 @@ export default function SettingsPage() {
               </span>
             </div>
 
-            {/* ⭐ Şifre Güç Göstergesi */}
-            <p
-              className="password-strength"
-              style={{
-                color: getStrengthColor(
-                  checkPasswordStrength(passwordForm.newPassword)
-                ),
-                marginTop: "5px",
-                fontSize: "14px"
-              }}
-            >
-              Güç: {checkPasswordStrength(passwordForm.newPassword)}
-            </p>
+            {/* ⭐ Şifre boş değilse güç göstergesi görünsün */}
+            {passwordForm.newPassword.length > 0 && (
+              <p
+                className="password-strength"
+                style={{
+                  color: getStrengthColor(
+                    checkPasswordStrength(passwordForm.newPassword)
+                  ),
+                  marginTop: "5px",
+                  fontSize: "14px"
+                }}
+              >
+                Güç: {checkPasswordStrength(passwordForm.newPassword)}
+              </p>
+            )}
 
             <label>Yeni şifre tekrar:</label>
             <div className="password-wrapper">

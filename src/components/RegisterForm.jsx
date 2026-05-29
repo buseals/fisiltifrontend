@@ -9,16 +9,13 @@ export default function RegisterForm({ onSwitch }) {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  // ⭐ Şifre Güç Kontrolü
   const checkPasswordStrength = (password) => {
     let score = 0;
-
     if (password.length >= 8) score++;
     if (/[A-Z]/.test(password)) score++;
     if (/[a-z]/.test(password)) score++;
     if (/[0-9]/.test(password)) score++;
     if (/[^A-Za-z0-9]/.test(password)) score++;
-
     if (score <= 2) return "zayıf";
     if (score === 3) return "orta";
     return "güçlü";
@@ -37,45 +34,36 @@ export default function RegisterForm({ onSwitch }) {
     setError("");
 
     const strength = checkPasswordStrength(password);
-
-    // ⭐ Zayıf şifre engelle
     if (strength === "zayıf") {
       setError("Şifre çok zayıf. Lütfen daha güçlü bir şifre belirleyin.");
       setLoading(false);
       return;
     }
 
-    // ⭐ Yeni kullanıcı objesi
-    const newUser = {
-      name,
-      email,
-      password,
-      role: "user",
-    };
-
-    // ⭐ Var olan kullanıcıları al (yoksa boş dizi)
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // ⭐ Aynı email varsa hata ver
     if (users.some((u) => u.email === email)) {
       setError("Bu e‑posta zaten kayıtlı.");
       setLoading(false);
       return;
     }
 
-    // ⭐ Yeni kullanıcıyı listeye ekle
-    users.push(newUser);
+    const newUser = {
+      name,
+      email,
+      password,
+      role: "user",
+      joinDate: new Date().toLocaleDateString(),
+      username: "@" + name.toLowerCase().replace(/\s+/g, "_")
+    };
 
-    // ⭐ Güncellenmiş kullanıcı listesini kaydet
+    users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
 
     setMessage("Kayıt başarılı! Giriş yapabilirsin.");
     setLoading(false);
 
-    // ⭐ 1 saniye sonra login moduna dön
-    setTimeout(() => {
-      onSwitch();
-    }, 1000);
+    setTimeout(() => onSwitch(), 1000);
   };
 
   return (
@@ -125,17 +113,18 @@ export default function RegisterForm({ onSwitch }) {
         </span>
       </div>
 
-      {/* ⭐ Şifre Güç Göstergesi */}
-      <p
-        className="password-strength"
-        style={{
-          color: getStrengthColor(checkPasswordStrength(password)),
-          marginTop: "5px",
-          fontSize: "14px",
-        }}
-      >
-        Güç: {checkPasswordStrength(password)}
-      </p>
+      {password.length > 0 && (
+        <p
+          className="password-strength"
+          style={{
+            color: getStrengthColor(checkPasswordStrength(password)),
+            marginTop: "5px",
+            fontSize: "14px"
+          }}
+        >
+          Güç: {checkPasswordStrength(password)}
+        </p>
+      )}
 
       <button className="btn" disabled={loading}>
         {loading ? "Kaydediliyor..." : "Kayıt Ol"}

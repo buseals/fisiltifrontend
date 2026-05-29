@@ -7,6 +7,7 @@ export default function HomePage() {
 
   const [showPostForm, setShowPostForm] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showSubmenu, setShowSubmenu] = useState(false);
 
   const [posts, setPosts] = useState([]);
 
@@ -24,39 +25,34 @@ export default function HomePage() {
   ];
 
   // ⭐ POSTS YÜKLENİRKEN ESKİ ZAMANLARI DÜZELT
-  useEffect(() => {
-    const saved = localStorage.getItem("posts");
+useEffect(() => {
+  const saved = localStorage.getItem("posts");
 
-    if (saved) {
-      let loaded = JSON.parse(saved);
+  if (saved) {
+    let loaded = JSON.parse(saved);
 
-      loaded = loaded.map(p => {
-        if (typeof p.time === "string") {
-          const t = p.time;
+    loaded = loaded.map(p => {
+      if (typeof p.time === "string") {
+        const t = p.time;
 
-          if (t.includes("şimdi")) return { ...p, time: Date.now() };
-          if (t.includes("dakika")) return { ...p, time: Date.now() - parseInt(t) * 60000 };
-          if (t.includes("saat")) return { ...p, time: Date.now() - parseInt(t) * 3600000 };
-          if (t.includes("gün")) return { ...p, time: Date.now() - parseInt(t) * 86400000 };
+        if (t.includes("şimdi")) return { ...p, time: Date.now() };
+        if (t.includes("dakika")) return { ...p, time: Date.now() - parseInt(t) * 60000 };
+        if (t.includes("saat")) return { ...p, time: Date.now() - parseInt(t) * 3600000 };
+        if (t.includes("gün")) return { ...p, time: Date.now() - parseInt(t) * 86400000 };
 
-          return { ...p, time: Date.now() };
-        }
-        return p;
-      });
+        return { ...p, time: Date.now() };
+      }
+      return p;
+    });
 
-      setPosts(loaded);
-      localStorage.setItem("posts", JSON.stringify(loaded));
+    setPosts(loaded);
+    localStorage.setItem("posts", JSON.stringify(loaded));
 
-    } else {
-      setPosts(defaultPosts);
-      localStorage.setItem("posts", JSON.stringify(defaultPosts));
-    }
-    useEffect(() => {
-  
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
-
-  }, []);
+  } else {
+    setPosts(defaultPosts);
+    localStorage.setItem("posts", JSON.stringify(defaultPosts));
+  }
+}, []); 
 
   // ⭐ ADMIN PANELİNE KAYIT EKLEME
   const addAdminLog = (type, post) => {

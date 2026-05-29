@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 
 export default function HomePage() {
   const [activeMenu, setActiveMenu] = useState(null);
-  const [showSubmenu, setShowSubmenu] = useState(null);
+
   const [showPostForm, setShowPostForm] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -51,6 +51,11 @@ export default function HomePage() {
       setPosts(defaultPosts);
       localStorage.setItem("posts", JSON.stringify(defaultPosts));
     }
+    useEffect(() => {
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
   }, []);
 
   // ⭐ ADMIN PANELİNE KAYIT EKLEME
@@ -158,7 +163,8 @@ export default function HomePage() {
 
           <div className="logo-area">
             <div className="logo-icon-wrapper">
-              <img src="/assets/fisilti-icon.png" className="logo-icon" />
+              <img src="/assets/fisilti-icon.png" className="logo-icon" alt="" />
+
             </div>
 
             <div className="logo-text">

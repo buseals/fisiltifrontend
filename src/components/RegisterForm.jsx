@@ -9,11 +9,41 @@ export default function RegisterForm({ onSwitch }) {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+  // ⭐ Şifre Güç Kontrolü
+  const checkPasswordStrength = (password) => {
+    let score = 0;
+
+    if (password.length >= 8) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    if (score <= 2) return "zayıf";
+    if (score === 3) return "orta";
+    return "güçlü";
+  };
+
+  const getStrengthColor = (strength) => {
+    if (strength === "zayıf") return "red";
+    if (strength === "orta") return "orange";
+    return "limegreen";
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
     setError("");
+
+    const strength = checkPasswordStrength(password);
+
+    // ⭐ Zayıf şifre engelle
+    if (strength === "zayıf") {
+      setError("Şifre çok zayıf. Lütfen daha güçlü bir şifre belirleyin.");
+      setLoading(false);
+      return;
+    }
 
     // ⭐ Yeni kullanıcı objesi
     const newUser = {
@@ -94,6 +124,18 @@ export default function RegisterForm({ onSwitch }) {
           {showPassword ? "👁️" : "👁️‍🗨️"}
         </span>
       </div>
+
+      {/* ⭐ Şifre Güç Göstergesi */}
+      <p
+        className="password-strength"
+        style={{
+          color: getStrengthColor(checkPasswordStrength(password)),
+          marginTop: "5px",
+          fontSize: "14px",
+        }}
+      >
+        Güç: {checkPasswordStrength(password)}
+      </p>
 
       <button className="btn" disabled={loading}>
         {loading ? "Kaydediliyor..." : "Kayıt Ol"}

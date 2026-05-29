@@ -1,0 +1,86 @@
+.posts-container {
+  color: white;
+}
+
+.posts-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post-card {
+  background: #111;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-info h3 {
+  color: #9b5cff;
+  margin: 0;
+}
+
+.post-text {
+  margin: 6px 0;
+  opacity: 0.9;
+}
+
+.post-status {
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-top: 6px;
+  display: inline-block;
+}
+
+.post-status.yayında {
+  background: #1f8b4c;
+}
+
+.post-status.kaldırıldı {
+  background: #b82c2c;
+}
+
+.post-date {
+  display: block;
+  margin-top: 6px;
+  opacity: 0.7;
+  font-size: 13px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.remove {
+  background: #ff3b3b;
+  color: white;
+}
+
+.publish {
+  background: #6a00ff;
+  color: white;
+}
+
+.delete {
+  background: #ff006e;
+  color: white;
+}

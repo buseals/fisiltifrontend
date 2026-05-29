@@ -1,0 +1,79 @@
+.users-container {
+  color: white;
+}
+
+.users-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user-card {
+  background: #111;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info h3 {
+  color: #9b5cff;
+  margin: 0;
+}
+
+.user-info p {
+  margin: 4px 0;
+  opacity: 0.8;
+}
+
+.status {
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-top: 6px;
+  display: inline-block;
+}
+
+.status.aktif {
+  background: #1f8b4c;
+}
+
+.status.engelli {
+  background: #b82c2c;
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.block {
+  background: #ff3b3b;
+  color: white;
+}
+
+.unblock {
+  background: #6a00ff;
+  color: white;
+}
+
+.delete {
+  background: #ff006e;
+  color: white;
+}

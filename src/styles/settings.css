@@ -1,0 +1,358 @@
+/* GENEL LAYOUT */
+.settings-container {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+  color: white;
+  min-height: 100vh;
+}
+.settings-sidebar {
+  width: 240px;
+  padding: 22px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+
+  margin-left: 90px; /* ⭐ Sidebar'ı sağa kaydırır */
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-title {
+  font-size: 25px;
+  font-weight: 700px;
+  margin-bottom: 20px;
+}
+
+.settings-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 14px;
+  border-radius: 12px;
+  color: #ddd;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.settings-btn:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.settings-btn.active {
+  background: linear-gradient(135deg, #6a00ff, #b026ff);
+  border: none;
+  color: white;
+  box-shadow: 0 0 12px rgba(106,0,255,0.4);
+}
+
+.logout-btn {
+  margin-top: 20px;
+  background: #ff4d6d;
+  color: white;
+}
+
+.logout-btn:hover {
+  background: #ff2f52;
+}
+
+/* SAĞ PANEL */
+.settings-content {
+  flex: 1;
+  padding: 32px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+
+  margin-left: 20px;
+}
+
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.panel p {
+  font-size: 15px;
+  color: #ddd;
+  margin: 0;
+}
+
+.panel input {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  transition: 0.25s ease;
+}
+
+.panel input:focus {
+  border-color: #6a00ff;
+  box-shadow: 0 0 8px rgba(106,0,255,0.4);
+}
+
+.panel-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.panel-btn {
+  background: linear-gradient(135deg, #6a00ff, #b026ff);
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.panel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(106,0,255,0.4);
+}
+
+.panel-btn.cancel {
+  background: #444;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-btn {
+  background: #3a3a4a;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.toggle-btn.off {
+  background: #555;
+}
+
+.toggle-btn.active {
+  background: #6a5acd !important; /* Mor – AÇ aktif */
+  color: white !important;
+}
+
+.toggle-btn.off.active {
+  background: #d9534f !important; /* Kırmızı – KAPAT aktif */
+  color: white !important;
+}
+
+/* === LOGO === */
+.app-logo {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 45px;
+  height: 45px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 2.5px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  cursor: pointer;
+  z-index: 999;
+}
+
+.app-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.panel {
+  background: rgba(255, 255, 255, 0.05); /* modern yarı saydam blok */
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 28px;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  animation: fadeIn 0.25s ease;
+}
+.info-block {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 14px 18px;
+  border-radius: 12px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #eee;
+  font-size: 15px;
+}
+
+.info-label {
+  opacity: 0.7;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #fff;
+}
+.top-menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;        /* ⭐ butonlar arası boşluk */
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+
+.top-menu-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 10px;
+  color: #ddd;
+  cursor: pointer;
+  transition: 0.25s ease;
+  white-space: nowrap;   /* ⭐ taşmayı engeller */
+}
+
+.top-menu-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+}
+/* ⭐ GENEL GLASSMORPHISM PANEL */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Başlık */
+.glass-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Bilgi satırları */
+.glass-card .info-block {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px 15px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: space-between;
+  color: #eaeaea;
+}
+
+/* Input alanları */
+.glass-card input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+.glass-card input:focus {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Butonlar */
+.glass-card .panel-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  color: white;
+  transition: 0.2s;
+}
+
+.glass-card .panel-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Fade animasyonu */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* ⭐ ÜST MENÜ GLASSMORPHISM BUTONLARI */
+.glass-top-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 10px 18px;
+  border-radius: 14px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.25s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Hover efekti – neon parıltı */
+.glass-top-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 12px rgba(120, 80, 255, 0.7),
+              0 0 22px rgba(120, 80, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Butonları yan yana daha modern hizalama */
+.settings-top-menu {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}

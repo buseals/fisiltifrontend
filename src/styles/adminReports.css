@@ -1,0 +1,71 @@
+.reports-container {
+  color: white;
+}
+
+.reports-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.report-card {
+  background: #111;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #222;
+}
+
+.report-header {
+  margin-bottom: 10px;
+}
+
+.report-user {
+  font-size: 18px;
+  font-weight: 600;
+  color: #9b5cff;
+}
+
+.report-message {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.report-date {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.report-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ignore {
+  background: #444;
+  color: white;
+}
+
+.keep {
+  background: #6a00ff;
+  color: white;
+}
+
+.delete {
+  background: #ff3b3b;
+  color: white;
+}

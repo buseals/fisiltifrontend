@@ -1,0 +1,71 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "2h-8D0IbG00"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "FXjGJbGV260"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "0HCVAWOx7mg"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "7Rw_UYj7FrA"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "MuqI_dg2P2A"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "rwxjmPOKupU"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "BdSmY6Dkkog"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "y42rdG9goUw"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "x9CQUHVKi5k"
+    },
+    {
+      "name": "Buse",
+      "email": "alsekerbusee@gmail.com",
+      "password": "123456",
+      "id": "qPviGGkS0Dg"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

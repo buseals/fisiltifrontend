@@ -1,0 +1,479 @@
+/* GENEL */
+body {
+  background: #0f0f14;
+  color: #f1f5f9;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ANA KAPSAYICI */
+.home-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ÜST BAR */
+.topbar {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 16px 22px;
+  border-radius: 18px;
+  margin-bottom: 22px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+}
+
+.topbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* LOGO ALANI */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon-wrapper {
+  width: 46px;
+  height: 46px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.logo-sub {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+/* ARAMA */
+.search {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: white;
+  width: 40%;
+  transition: 0.25s ease;
+}
+
+.search:focus {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.35);
+}
+
+.search::placeholder {
+  color: #94a3b8;
+}
+
+/* BİLDİRİM BUTONU */
+.notif-btn {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: 0.25s ease;
+  color: white;
+}
+
+.notif-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(120,80,255,0.6);
+}
+
+/* YENİ GÖNDERİ BUTONU */
+.new-post-btn {
+  background: #7c3aed;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.new-post-btn:hover {
+  background: #8b5cf6;
+}
+
+/* LAYOUT */
+.main-layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* SOL MENÜ */
+.sidebar {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 18px;
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.30);
+  height: fit-content;
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.sidebar li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.25s ease;
+}
+
+.sidebar li:hover {
+  color: #c084fc;
+  transform: translateX(3px);
+}
+
+/* ORTA GÖNDERİLER */
+.feed {
+  flex: 2;
+}
+
+/* GÖNDERİ KARTI – MODERN */
+.post-card {
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  transition: 0.25s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.45);
+}
+
+/* ÜST SATIR */
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.post-user {
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0;
+  padding-right: 400px;
+}
+
+/* ÜÇ NOKTA */
+.post-menu {
+  cursor: pointer;
+  font-size: 20px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-top: -4px;
+}
+
+/* METİN */
+.post-text {
+  font-size: 16px;
+  margin: 0;
+  padding-left: 10px;
+  text-align: left;
+  line-height: 1.45;
+}
+
+/* GİZLİLİK */
+.post-privacy {
+  font-size: 12px;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 25px;
+}
+
+/* SAAT */
+.post-time {
+  font-size: 13px;
+  opacity: 0.75;
+  align-self: flex-end;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* DROPDOWN MENÜ */
+.dropdown-menu {
+  position: absolute;
+  top: 35px;
+  right: 10px;
+  background: #1f2937;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 8px;
+  border-radius: 8px;
+  width: 150px;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: none;
+  color: #f1f5f9;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.dropdown-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* ALT MENÜ */
+.submenu {
+  margin-top: 6px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 6px;
+}
+
+.dropdown-subitem {
+  width: 100%;
+  padding: 6px;
+  background: none;
+  border: none;
+  color: #f1f5f9;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.dropdown-subitem:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* SAĞ TRENDLER */
+.rightbar {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 18px;
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.30);
+  height: fit-content;
+}
+
+.rightbar h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.rightbar li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.rightbar li:hover {
+  color: #c084fc;
+  transform: translateX(3px);
+}
+
+/* SAĞ ALTA SABİT BUTON */
+.floating-post-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 28px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.floating-post-btn:hover {
+  background: #8b5cf6;
+}
+
+/* MODAL – modern ve daha küçük */
+.post-form-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(20,20,30,0.85);
+  padding: 18px;
+  border-radius: 18px;
+  width: 85%;              /* küçültüldü */
+  max-width: 360px;        /* eskiden 420–460px idi */
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;               /* daha kompakt */
+}
+
+/* YAZI KUTUSU – daha küçük */
+.post-input {
+  width:95%;
+  height: 100px;          /* küçültüldü */
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: #f1f5f9;
+  padding: 12px;
+  font-size: 15px;
+  resize: none;
+  backdrop-filter: blur(6px);
+}
+
+/* RENK & EMOJİ – aynı ama daha sıkı */
+.color-options, .emoji-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;                /* daha sıkı */
+}
+
+.color-btn {
+  width: 26px;             /* küçültüldü */
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.color-btn:hover {
+  transform: scale(1.15);
+}
+
+.emoji-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 4px 8px;        /* küçültüldü */
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;         /* küçültüldü */
+  transition: 0.2s ease;
+}
+
+.emoji-btn:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+}
+
+/* BUTONLAR – daha kompakt */
+.post-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn {
+  background: #7c3aed;
+  padding: 8px 14px;       /* küçültüldü */
+  border-radius: 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;         /* küçültüldü */
+}
+
+.btn:hover {
+  background: #8b5cf6;
+}
+
+
+/* BİLDİRİM MODALI */
+.notif-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(25,25,35,0.90);
+  padding: 24px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.notif-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notif-list li {
+  background: rgba(255,255,255,0.08);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+.char-count {
+  font-size: 12px;
+  opacity: 0.6;
+  text-align: right;
+  margin-top: -6px;
+  margin-bottom: -4px;
+  color: #cbd5e1;
+  letter-spacing: 0.3px;
+}

@@ -1,0 +1,99 @@
+/* === PANEL === */
+.notif-panel {
+  position: fixed;
+  top: 70px;
+  right: 30px;
+  width: 300px;
+  background: rgba(25, 25, 25, 0.55);
+  backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 22px;
+  z-index: 2000;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.55);
+  animation: notifFade 0.25s ease-out;
+}
+
+@keyframes notifFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === BAŞLIK === */
+.notif-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.notif-header h3 {
+  color: #e8ddff;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* === TÜMÜNÜ OKUNDU YAP === */
+.notif-read {
+  background: rgba(155, 92, 255, 0.25);
+  border: 1px solid rgba(155, 92, 255, 0.4);
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: #d8c8ff;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s ease;
+}
+
+.notif-read:hover {
+  background: rgba(155, 92, 255, 0.45);
+  color: white;
+}
+
+/* === BİLDİRİM KARTLARI === */
+.notif-item {
+  background: rgba(255,255,255,0.06);
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  color: #eee;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: 0.2s ease;
+}
+
+.notif-item:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.notif-item.read {
+  opacity: 0.45;
+}
+
+/* === BOŞ DURUM === */
+.notif-empty {
+  text-align: center;
+  padding: 25px 0;
+  color: #bbb;
+  font-size: 14px;
+}
+
+/* === ALTA İNEN MİNİMAL KAPAT BUTONU === */
+.notif-close {
+  width: 100%;
+  margin-top: 10px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 8px 0;
+  border-radius: 10px;
+  color: #ddd;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s ease;
+}
+
+.notif-close:hover {
+  background: rgba(255,255,255,0.18);
+  color: white;
+}

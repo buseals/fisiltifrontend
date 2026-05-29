@@ -1,0 +1,80 @@
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  background: #0d0d0d;
+}
+
+.admin-sidebar {
+  width: 260px;
+  background: #111;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-right: 1px solid #222;
+}
+
+.admin-title {
+  color: #9b5cff;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.admin-sidebar button {
+  padding: 12px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.admin-sidebar button:hover {
+  background: #222;
+}
+
+.logout-btn {
+  margin-top: auto;
+  background: #ff3b3b !important;
+  border-color: #ff3b3b !important;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 40px;
+  color: white;
+}
+.dashboard-wrapper {
+  color: white;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* ⭐ Grafikler yan yana */
+.charts-row {
+  display: flex;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+/* ⭐ Grafik kutuları */
+.chart-box {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.chart-box h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #d8c8ff;
+}
+

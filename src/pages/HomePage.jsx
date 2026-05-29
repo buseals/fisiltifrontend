@@ -19,19 +19,22 @@ export default function HomePage() {
   useEffect(() => {
     const saved = localStorage.getItem("posts");
 
-    const defaultPosts = [];
+    const defaultPosts = []; // artık boş
 
     if (saved) {
       let loaded = JSON.parse(saved);
 
-      loaded = loaded.map(p => {
+      loaded = loaded.map((p) => {
         if (typeof p.time === "string") {
           const t = p.time;
 
           if (t.includes("şimdi")) return { ...p, time: Date.now() };
-          if (t.includes("dakika")) return { ...p, time: Date.now() - parseInt(t) * 60000 };
-          if (t.includes("saat")) return { ...p, time: Date.now() - parseInt(t) * 3600000 };
-          if (t.includes("gün")) return { ...p, time: Date.now() - parseInt(t) * 86400000 };
+          if (t.includes("dakika"))
+            return { ...p, time: Date.now() - parseInt(t) * 60000 };
+          if (t.includes("saat"))
+            return { ...p, time: Date.now() - parseInt(t) * 3600000 };
+          if (t.includes("gün"))
+            return { ...p, time: Date.now() - parseInt(t) * 86400000 };
 
           return { ...p, time: Date.now() };
         }
@@ -40,14 +43,13 @@ export default function HomePage() {
 
       setPosts(loaded);
       localStorage.setItem("posts", JSON.stringify(loaded));
-
     } else {
       setPosts(defaultPosts);
       localStorage.setItem("posts", JSON.stringify(defaultPosts));
     }
   }, []);
 
-  // ⭐ ADMIN PANELİNE KAYIT EKLEME (DÜZELTİLDİ)
+  // ⭐ ADMIN PANELİNE KAYIT EKLEME
   const addAdminLog = (type, post) => {
     const logs = JSON.parse(localStorage.getItem("adminLogs") || "[]");
 
@@ -57,7 +59,7 @@ export default function HomePage() {
       postId: post.id,
       user: post.username,
       text: post.content,
-      time: Date.now()
+      time: Date.now(),
     };
 
     logs.push(newLog);
@@ -124,7 +126,7 @@ export default function HomePage() {
     return brightness > 140 ? "#000" : "#fff";
   };
 
-  // ⭐ YENİ POST PAYLAŞMA (DÜZELTİLDİ)
+  // ⭐ YENİ POST PAYLAŞMA
   const handleShare = () => {
     if (postText.trim() === "") return;
 
@@ -134,7 +136,7 @@ export default function HomePage() {
       content: postText,
       time: Date.now(),
       color: postColor,
-      emoji: "💬"
+      emoji: "💬",
     };
 
     const updated = [newPost, ...posts];
@@ -144,201 +146,201 @@ export default function HomePage() {
     setPostColor("#1f2937");
     setShowPostForm(false);
   };
-}
-// ⭐ RETURN BLOĞU
-return (
-  <div className="home-container">
 
-    {/* ÜST BAR */}
-    <div className="topbar">
-      <div className="topbar-content">
+  // ⭐ RETURN BLOĞU — TAM, HATASIZ
+  return (
+    <div className="home-container">
 
-        <div className="logo-area">
-          <div className="logo-icon-wrapper">
-            <img src="/assets/fisilti-icon.png" className="logo-icon" alt="" />
+      {/* ÜST BAR */}
+      <div className="topbar">
+        <div className="topbar-content">
+
+          <div className="logo-area">
+            <div className="logo-icon-wrapper">
+              <img src="/assets/fisilti-icon.png" className="logo-icon" alt="" />
+            </div>
+
+            <div className="logo-text">
+              <span className="logo-title">FISILTI</span>
+              <span className="logo-sub">Sessizce paylaş, sadece takip ettiklerin duysun.</span>
+            </div>
           </div>
 
-          <div className="logo-text">
-            <span className="logo-title">FISILTI</span>
-            <span className="logo-sub">Sessizce paylaş, sadece takip ettiklerin duysun.</span>
-          </div>
+          <input type="text" className="search" placeholder="Ara..." />
+
+          <button className="notif-btn" onClick={() => setShowNotifications(true)}>
+            🔔
+          </button>
+
+          <button className="new-post-btn" onClick={() => setShowPostForm(true)}>
+            + Yeni Gönderi
+          </button>
+
         </div>
-
-        <input type="text" className="search" placeholder="Ara..." />
-
-        <button className="notif-btn" onClick={() => setShowNotifications(true)}>
-          🔔
-        </button>
-
-        <button className="new-post-btn" onClick={() => setShowPostForm(true)}>
-          + Yeni Gönderi
-        </button>
-
       </div>
-    </div>
 
-    {/* GÖNDERİLER */}
-    <div className="main-layout">
+      {/* GÖNDERİLER */}
+      <div className="main-layout">
 
-      <Sidebar
-        activeMenu={activeMenu}
-        setActiveMenu={setActiveMenu}
-        showSubmenu={showSubmenu}
-        setShowSubmenu={setShowSubmenu}
-        onLogout={handleLogout}
-      />
+        <Sidebar
+          activeMenu={activeMenu}
+          setActiveMenu={setActiveMenu}
+          showSubmenu={showSubmenu}
+          setShowSubmenu={setShowSubmenu}
+          onLogout={handleLogout}
+        />
 
-      <div className="feed">
-        {posts.map((post) => (
-          <div
-            key={post.id}
-            className="post-card"
-            style={{
-              background: post.color,
-              color: getTextColor(post.color)
-            }}
-          >
+        <div className="feed">
+          {posts.map((post) => (
+            <div
+              key={post.id}
+              className="post-card"
+              style={{
+                background: post.color,
+                color: getTextColor(post.color)
+              }}
+            >
 
-            <div className="post-header">
-              <div className="post-user">{post.username}</div>
+              <div className="post-header">
+                <div className="post-user">{post.username}</div>
 
-              <div
-                className="post-menu"
-                onClick={() => {
-                  setActiveMenu(activeMenu === post.id ? null : post.id);
-                  setShowSubmenu(false);
-                }}
-              >
-                ⋮
-              </div>
-            </div>
-
-            <div className="post-text">
-              {post.emoji && <span className="post-emoji">{post.emoji} </span>}
-              {post.content}
-            </div>
-
-            <div className="post-privacy">
-              <span className="privacy-icon">🔒</span>
-              Bu gönderiyi sadece takip ettiklerin görebilir
-            </div>
-
-            <div className="post-time">{formatTime(post.time)}</div>
-
-            {activeMenu === post.id && (
-              <div className="dropdown-menu">
-
-                <button className="dropdown-item" onClick={() => handleReport(post)}>
-                  Şikayet Et
-                </button>
-
-                <div className="submenu">
-                  <button className="dropdown-subitem" onClick={() => handleBlock(post)}>
-                    Engelle
-                  </button>
-
-                  <button className="dropdown-subitem" onClick={() => handleSpam(post)}>
-                    Spam
-                  </button>
+                <div
+                  className="post-menu"
+                  onClick={() => {
+                    setActiveMenu(activeMenu === post.id ? null : post.id);
+                    setShowSubmenu(false);
+                  }}
+                >
+                  ⋮
                 </div>
-
               </div>
-            )}
 
+              <div className="post-text">
+                {post.emoji && <span className="post-emoji">{post.emoji} </span>}
+                {post.content}
+              </div>
+
+              <div className="post-privacy">
+                <span className="privacy-icon">🔒</span>
+                Bu gönderiyi sadece takip ettiklerin görebilir
+              </div>
+
+              <div className="post-time">{formatTime(post.time)}</div>
+
+              {activeMenu === post.id && (
+                <div className="dropdown-menu">
+
+                  <button className="dropdown-item" onClick={() => handleReport(post)}>
+                    Şikayet Et
+                  </button>
+
+                  <div className="submenu">
+                    <button className="dropdown-subitem" onClick={() => handleBlock(post)}>
+                      Engelle
+                    </button>
+
+                    <button className="dropdown-subitem" onClick={() => handleSpam(post)}>
+                      Spam
+                    </button>
+                  </div>
+
+                </div>
+              )}
+
+            </div>
+          ))}
+        </div>
+
+        <div className="rightbar">
+          <h2>Trendler 🔥</h2>
+          <ul>
+            <li>#güneşliGün</li>
+            <li>#kahveKeyfi</li>
+            <li>#yeniŞarkı</li>
+            <li>#mutluluk</li>
+            <li>#fısıltıApp</li>
+          </ul>
+        </div>
+
+      </div>
+
+      {/* SAĞ ALTA SABİT BUTON */}
+      <button className="floating-post-btn" onClick={() => setShowPostForm(true)}>
+        ➕
+      </button>
+
+      {/* YENİ GÖNDERİ MODALI */}
+      {showPostForm && (
+        <div className="post-form-modal">
+
+          <textarea
+            className="post-input"
+            style={{ background: postColor }}
+            value={postText}
+            onChange={(e) => setPostText(e.target.value)}
+            placeholder="Bugün ne fısıldayacaksın?"
+            maxLength={280}
+          ></textarea>
+
+          <div className="char-count">{postText.length}/280</div>
+
+          <div className="color-options">
+            <span>🎨 Renk Seç:</span>
+            {[
+              "#7c3aed","#6d28d9","#8b5cf6","#a78bfa",
+              "#ef4444","#dc2626","#f87171","#fecaca",
+              "#22c55e","#16a34a","#4ade80","#bbf7d0",
+              "#3b82f6","#2563eb","#60a5fa","#bfdbfe",
+              "#f59e0b","#d97706","#fbbf24","#fde68a",
+              "#14b8a6","#0d9488","#5eead4","#ccfbf1",
+              "#9333ea","#e11d48","#0ea5e9","#10b981",
+              "#1f2937","#111827","#4b5563","#6b7280",
+              "#9ca3af","#d1d5db","#ffffff","#000000"
+            ].map((c,i)=>(
+              <button key={i} className="color-btn" style={{background:c}} onClick={() => setPostColor(c)}></button>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <div className="rightbar">
-        <h2>Trendler 🔥</h2>
-        <ul>
-          <li>#güneşliGün</li>
-          <li>#kahveKeyfi</li>
-          <li>#yeniŞarkı</li>
-          <li>#mutluluk</li>
-          <li>#fısıltıApp</li>
-        </ul>
-      </div>
+          <div className="emoji-options">
+            <span>😊 Emoji Ekle:</span>
+            {[
+              "🌸","🌼","🌺","🌻","🌷","🌹","🍀","🍃","🌿","🌵",
+              "☀️","🌤️","⛅","🌥","🌧","⛈","🌈","❄️","🌙","⭐",
+              "🔥","💧","🌊","🍂","🍁","🌪","🌫",
+              "😊","😎","🥰","😍","🤩","🤭","😇","🤍","🖤","💜",
+              "❤️","🧡","💛","💚","💙","💗","💖","💘","💞","💫",
+              "☕","🍵","🍔","🍟","🍕","🍝","🍣","🍩","🍪","🍫",
+              "🎶","🎧","🎤","🎬","🎮","🎨","📚","🖥","💪","🏃‍♀️"
+            ].map((e,i)=>(
+              <button key={i} className="emoji-btn" onClick={() => setPostText(postText + e)}>{e}</button>
+            ))}
+          </div>
+
+          <div className="post-form-actions">
+            <button className="btn" onClick={() => setShowPostForm(false)}>İptal ❌</button>
+            <button className="btn" onClick={handleShare}>Paylaş 📤</button>
+          </div>
+
+        </div>
+      )}
+
+      {/* BİLDİRİM MODALI */}
+      {showNotifications && (
+        <div className="notif-modal">
+          <h3>Bildirimler</h3>
+
+          <ul className="notif-list">
+            <li>📩 Yeni takip isteği</li>
+            <li>💬 Gönderine biri emoji bıraktı</li>
+            <li>⭐ Bugün çok aktif görünüyorsun!</li>
+          </ul>
+
+          <button className="btn" onClick={() => setShowNotifications(false)}>
+            Kapat ❌
+          </button>
+        </div>
+      )}
 
     </div>
-
-    {/* SAĞ ALTA SABİT BUTON */}
-    <button className="floating-post-btn" onClick={() => setShowPostForm(true)}>
-      ➕
-    </button>
-
-    {/* YENİ GÖNDERİ MODALI */}
-    {showPostForm && (
-      <div className="post-form-modal">
-
-        <textarea
-          className="post-input"
-          style={{ background: postColor }}
-          value={postText}
-          onChange={(e) => setPostText(e.target.value)}
-          placeholder="Bugün ne fısıldayacaksın?"
-          maxLength={280}
-        ></textarea>
-
-        <div className="char-count">{postText.length}/280</div>
-
-        <div className="color-options">
-          <span>🎨 Renk Seç:</span>
-          {[
-            "#7c3aed","#6d28d9","#8b5cf6","#a78bfa",
-            "#ef4444","#dc2626","#f87171","#fecaca",
-            "#22c55e","#16a34a","#4ade80","#bbf7d0",
-            "#3b82f6","#2563eb","#60a5fa","#bfdbfe",
-            "#f59e0b","#d97706","#fbbf24","#fde68a",
-            "#14b8a6","#0d9488","#5eead4","#ccfbf1",
-            "#9333ea","#e11d48","#0ea5e9","#10b981",
-            "#1f2937","#111827","#4b5563","#6b7280",
-            "#9ca3af","#d1d5db","#ffffff","#000000"
-          ].map((c,i)=>(
-            <button key={i} className="color-btn" style={{background:c}} onClick={() => setPostColor(c)}></button>
-          ))}
-        </div>
-
-        <div className="emoji-options">
-          <span>😊 Emoji Ekle:</span>
-          {[
-            "🌸","🌼","🌺","🌻","🌷","🌹","🍀","🍃","🌿","🌵",
-            "☀️","🌤️","⛅","🌥","🌧","⛈","🌈","❄️","🌙","⭐",
-            "🔥","💧","🌊","🍂","🍁","🌪","🌫",
-            "😊","😎","🥰","😍","🤩","🤭","😇","🤍","🖤","💜",
-            "❤️","🧡","💛","💚","💙","💗","💖","💘","💞","💫",
-            "☕","🍵","🍔","🍟","🍕","🍝","🍣","🍩","🍪","🍫",
-            "🎶","🎧","🎤","🎬","🎮","🎨","📚","🖥","💪","🏃‍♀️"
-          ].map((e,i)=>(
-            <button key={i} className="emoji-btn" onClick={() => setPostText(postText + e)}>{e}</button>
-          ))}
-        </div>
-
-        <div className="post-form-actions">
-          <button className="btn" onClick={() => setShowPostForm(false)}>İptal ❌</button>
-          <button className="btn" onClick={handleShare}>Paylaş 📤</button>
-        </div>
-
-      </div>
-    )}
-
-    {/* BİLDİRİM MODALI */}
-    {showNotifications && (
-      <div className="notif-modal">
-        <h3>Bildirimler</h3>
-
-        <ul className="notif-list">
-          <li>📩 Yeni takip isteği</li>
-          <li>💬 Gönderine biri emoji bıraktı</li>
-          <li>⭐ Bugün çok aktif görünüyorsun!</li>
-        </ul>
-
-        <button className="btn" onClick={() => setShowNotifications(false)}>
-          Kapat ❌
-        </button>
-      </div>
-    )}
-
-  </div>
-);
-
+  );
+}

@@ -24,7 +24,7 @@ export default function HomePage() {
     { id: 4, user: "@ayşe", text: "Kitap okumak gibisi yok 📚", time: Date.now() - 1800000, color: "rgba(255,255,255,0.04)" }
   ];
 
-  // ⭐ POSTS YÜKLENİRKEN ESKİ ZAMANLARI DÜZELT
+// ⭐ POSTS YÜKLENİRKEN ESKİ ZAMANLARI DÜZELT
 useEffect(() => {
   const saved = localStorage.getItem("posts");
 
@@ -52,7 +52,8 @@ useEffect(() => {
     setPosts(defaultPosts);
     localStorage.setItem("posts", JSON.stringify(defaultPosts));
   }
-}, []); 
+}, []);
+
 
   // ⭐ ADMIN PANELİNE KAYIT EKLEME
   const addAdminLog = (type, post) => {
@@ -98,7 +99,7 @@ useEffect(() => {
     addAdminLog("şikayet", post);
     alert("Gönderi şikayet edildi!");
     setActiveMenu(null);
-    setShowSubmenu(null);
+    setShowSubmenu(false);
   };
 
   // ⭐ ENGELLE
@@ -106,7 +107,7 @@ useEffect(() => {
     addAdminLog("engelle", post);
     alert(post.user + " engellendi!");
     setActiveMenu(null);
-    setShowSubmenu(null);
+    setShowSubmenu(false);
   };
 
   // ⭐ SPAM
@@ -114,7 +115,7 @@ useEffect(() => {
     addAdminLog("spam", post);
     alert("Gönderi spam olarak işaretlendi!");
     setActiveMenu(null);
-    setShowSubmenu(null);
+    setShowSubmenu(false);
   };
 
   const [postText, setPostText] = useState("");
@@ -205,7 +206,7 @@ useEffect(() => {
                   className="post-menu"
                   onClick={() => {
                     setActiveMenu(activeMenu === post.id ? null : post.id);
-                    setShowSubmenu(null);
+                    setShowSubmenu(false);
                   }}
                 >
                   ⋮

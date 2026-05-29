@@ -50,7 +50,8 @@ export default function HomePage() {
       setPosts(defaultPosts);
       localStorage.setItem("posts", JSON.stringify(defaultPosts));
     }
-  }, []);
+ }, [defaultPosts]);
+
 
   // ⭐ ADMIN PANELİNE KAYIT EKLEME
   const addAdminLog = (type, post) => {
